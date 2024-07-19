@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - Portfolio{% endblock %}
+
+{% block content %}
+<body>
+    <main>
+        <section id="about" style="font-size: 17px;">
+            <h2>About Me</h2>
+            {% for about_item in about %}
+                <p class="about-content">{{ about_item.about }}</p>
+            {% endfor %}
+        </section>
+
+    
+<section id="stack">
+    <h2>Tech Stack</h2>
+    <div class="stack-grid">
+        {% for stack_item in stack %}
+            <div class="stack-item">
+                <div class="stack-details">
+                    <div class="stack-images">
+                        {% if stack_item.language_image %}
+                            <span>{{ stack_item.title }} :</span>
+                            <img src="{{ stack_item.language_image.url }}" alt="{{ stack_item.language }}">
+                        {% endif %}
+                        {% if stack_item.framework_image %}
+                            <span>{{ stack_item.title }} :</span>
+                            <img src="{{ stack_item.framework_image.url }}" alt="{{ stack_item.framework }}">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+    
+        <section id="portfolio">
+            <h2>My Projects</h2>
+            <div class="portfolio-grid">
+                {% for folio_item in folio %}
+                    <div class="portfolio-item">
+                        {% if folio_item.project_image %}
+                            <img src="{{ folio_item.project_image.url }}" alt="{{ folio_item.project_description }}">
+                        {% else %}
+                            <img src="{% static 'images/default-poster.jpg' %}" alt="Default poster">
+                        {% endif %}
+                        <div class="portfolio-content">
+                            <h3>{{ folio_item.title }}</h3>
+                            <p class="folio-description">{{ folio_item.project_description | safe }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Interested in collaborating? Get in touch!</p>
+            <a href="mailto:upshlangabeza@example.com" class="btn">Email Me</a>
+        </section>
+    </main>
+
+</body>
+{% endblock %}
